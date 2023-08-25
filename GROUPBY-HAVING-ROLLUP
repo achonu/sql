@@ -1,0 +1,41 @@
+-- GROUP BY
+-- using GROUP BY to see total sales per client
+
+
+SELECT 
+  client_id,
+SUM(invoice_total) AS total_sales
+FROM invoices
+GROUP BY client_id
+ORDER BY total_sales DESC ;
+
+
+-- GROUP BY using JOIN
+
+SELECT 
+  client_id,
+SUM(invoice_total) AS total_sales
+FROM invoices i
+JOIN clienta USING (client_id)
+WHERE invoice_date >= '2023-06-02'
+GROUP BY client_id
+ORDER BY total_sales DESC;
+
+
+-- HAVING
+
+SELECT
+  client_id,
+  SUM(invoice_total) AS total_sales
+FROM invoices
+GROUP BY client_id
+HAVING total_sales > 500 AND number_of_invoices > 5 ;
+
+
+-- ROLLUP - only in MYSQL
+
+SELECT
+  client_id,
+SUM(invoice_total) AS total_sales
+FROM invoices
+GROUP BY client_id WITH ROLLUP;
