@@ -1,0 +1,31 @@
+-- Find products that are more expensive than lettuce (id = 3)
+
+SELECT *
+FROM products
+WHERE unit_price > (
+  SELECT unit_price
+  FROM products
+  WHERE product_id = 3
+);
+
+-- Find employees who earn more than average
+
+USER sql_hr;
+
+SELECT * 
+FROM employees
+WHERE salary > (
+  SELECT AVG(salary)
+  FROM employees
+)
+
+
+-- Subqueries in the SELECT clause
+
+SELECT
+  invoice_id,
+  invoice_total,
+  (SELECT AVG(invoice_total)
+    FROM invoices) AS invoice_average,
+invoice_total - (SELECT invoice_average) AS difference
+    FROM invoices ;
