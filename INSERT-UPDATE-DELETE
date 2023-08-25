@@ -58,4 +58,3 @@ WHERE client_id = (
   WHERE name = 'Myworks'
   )
   ;
-)
