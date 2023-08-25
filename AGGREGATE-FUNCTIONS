@@ -1,0 +1,19 @@
+SELECT
+  MAX(invoice_total) AS highest,
+  MIN(invoice_total) AS lowest,
+  AVG(invoice_total) AS average,
+  SUM(invoice_total * 1.1) AS total,
+  COUNT(*) AS total_records
+FROM invoices
+WHERE invoice_date > '2023-01-02'
+;
+
+SELECT
+  MAX(invoice_total) AS highest,
+  MIN(invoice_total) AS lowest,
+  AVG(invoice_total) AS average,
+  SUM(invoice_total * 1.1) AS total,
+  COUNT(DISTINCT client_id) AS total_records -- no duplicate client id values
+FROM invoices
+WHERE invoice_date > '2023-01-02'
+;
