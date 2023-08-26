@@ -1,0 +1,26 @@
+-- IFNULL
+
+USE sql_store;
+
+SELECT
+  order_id,
+  IFNULL(shipper_id, 'Not assigned') AS shipper
+FROM orders;
+
+-- COALESCE
+
+SELECT
+  order_id,
+  COALESCE(shipper_id, comments, 'Not assigned') AS shipper
+FROM orders;
+
+-- IF
+
+SELECT
+  order_id,
+  order_date,
+IF(
+  YEAR(order_date) = YEAR(NOW()),
+  'Active',
+  'Archived') AS category
+FROM orders;
