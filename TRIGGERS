@@ -1,0 +1,25 @@
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS payments_after_delete;
+
+CREATE TRIGGER payments_after_delete
+    AFTER DElETE ON payments
+FOR EACH ROW
+
+
+
+BEGIN
+    UPDATE invoices
+    SET payment_total = payment_total + NEW.amount
+    WHERE invoice_id = NEW.invoice_id;
+
+
+END $$
+
+DELIMITER;
+
+-- insert new values into the payments table
+
+INSERT INTO payments
+VALUES (DEFAULT, 5, 3, '2019-01-01', 10, 1);
+
